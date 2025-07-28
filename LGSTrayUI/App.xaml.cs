@@ -51,6 +51,8 @@ public partial class App : Application
         builder.Services.AddSingleton<MainTaskbarIconWrapper>();
         builder.Services.AddHostedService<NotifyIconViewModel>();
 
+        builder.Services.AddHostedService<SharedMemoryDeviceService>();
+
         var host = builder.Build();
         await host.RunAsync();
         Dispatcher.InvokeShutdown();

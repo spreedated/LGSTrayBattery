@@ -12,7 +12,7 @@ using Websocket.Client;
 
 namespace LGSTrayCore.Managers
 {
-    file struct GHUBMsg
+    file struct GHubMsg
     {
         public string MsgId { get; set; }
         public string Verb { get; set; }
@@ -21,9 +21,9 @@ namespace LGSTrayCore.Managers
         public JObject Result { get; set; }
         public JObject Payload { get; set; }
 
-        public static GHUBMsg DeserializeJson(string json)
+        public static GHubMsg DeserializeJson(string json)
         {
-            return JsonConvert.DeserializeObject<GHUBMsg>(json);
+            return JsonConvert.DeserializeObject<GHubMsg>(json);
         }
     }
 
@@ -150,7 +150,7 @@ namespace LGSTrayCore.Managers
 
         protected void ParseSocketMsg(ResponseMessage msg)
         {
-            GHUBMsg ghubmsg = GHUBMsg.DeserializeJson(msg.Text!);
+            GHubMsg ghubmsg = GHubMsg.DeserializeJson(msg.Text!);
 
             switch (ghubmsg.Path)
             {
@@ -219,14 +219,17 @@ namespace LGSTrayCore.Managers
                     payload["mileage"]!.ToObject<double>()
                 ));
             }
-            catch { }
+            catch
+            {
+                //noop
+            }
         }
 
         public async void RediscoverDevices()
         {
             using var cts = new CancellationTokenSource();
-            await StopAsync(cts.Token);
-            await StartAsync(cts.Token);
+            await this.StopAsync(cts.Token);
+            await this.StartAsync(cts.Token);
         }
     }
 }

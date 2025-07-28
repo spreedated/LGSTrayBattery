@@ -3,8 +3,14 @@
     public enum DeviceType : byte
     {
         Keyboard = 0,
+        Mousepad = 1,
+        HeadsetDongle = 2,
         Mouse = 3,
-        Headset = 8,
+        KeyboardDongle = 4,
+        MouseDongle = 5,
+        KeyboardHeadsetDongle = 6,
+        MouseKeyboardDongle = 7,
+        Headset = 8
     }
 
     public enum PowerSupplyStatus : byte

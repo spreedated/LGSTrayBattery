@@ -16,7 +16,7 @@ namespace LGSTrayHID
         private readonly Dictionary<Guid, HidppDevices> _deviceMap = [];
         private readonly BlockingCollection<HidDeviceInfo> _deviceQueue = [];
 
-        public delegate void HidppDeviceEventHandler(IPCMessageType messageType, IPCMessage message);
+        public delegate void HidppDeviceEventHandler(IPCMessageType messageType, IpcMessage message);
 
         public event HidppDeviceEventHandler? HidppDeviceEvent;
 
@@ -30,7 +30,7 @@ namespace LGSTrayHID
             _ = HidInit();
         }
 
-        public void SignalDeviceEvent(IPCMessageType messageType, IPCMessage message)
+        public void SignalDeviceEvent(IPCMessageType messageType, IpcMessage message)
         {
             HidppDeviceEvent?.Invoke(messageType, message);
         }

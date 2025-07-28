@@ -32,38 +32,36 @@ public class HttpController : WebApiController
 
     private void DefaultResponse(string contentType = "text/html")
     {
-        Response.ContentType = contentType;
-        Response.DisableCaching();
-        Response.KeepAlive = false;
-        Response.Headers.Add("Access-Control-Allow-Origin", "*");
+        this.Response.ContentType = contentType;
+        this.Response.DisableCaching();
+        this.Response.KeepAlive = false;
+        this.Response.Headers.Add("Access-Control-Allow-Origin", "*");
     }
 
     [Route(HttpVerbs.Get, "/")]
     [Route(HttpVerbs.Get, "/devices")]
     public void GetDevices()
     {
-        DefaultResponse();
+        this.DefaultResponse();
 
-        using var tw = HttpContext.OpenResponseText();
+        using var tw = this.HttpContext.OpenResponseText();
         tw.Write("<html>");
 
         tw.Write("<b>By Device ID</b><br>");
-        foreach (var logiDevice in _logiDeviceCollection.GetDevices())
+        foreach (string? logiDeviceId in _logiDeviceCollection.GetDevices().Select(x => x.DeviceId))
         {
-            tw.Write($"{logiDevice.DeviceName} : <a href=\"/device/{logiDevice.DeviceId}\">{logiDevice.DeviceId}</a><br>");
+            tw.Write($"{logiDeviceId} : <a href=\"/device/{logiDeviceId}\">{logiDeviceId}</a><br>");
         }
 
         tw.Write("<br><b>By Device Name</b><br>");
-        foreach (var logiDevice in _logiDeviceCollection.GetDevices())
+        foreach (string? logiDeviceName in _logiDeviceCollection.GetDevices().Select(x => x.DeviceName))
         {
-            tw.Write($"<a href=\"/device/{Uri.EscapeDataString(logiDevice.DeviceName)}\">{logiDevice.DeviceName}</a><br>");
+            tw.Write($"<a href=\"/device/{Uri.EscapeDataString(logiDeviceName)}\">{logiDeviceName}</a><br>");
         }
 
         tw.Write("<br><hr>");
         tw.Write($"<i>LGSTray version: {_assemblyVersion}</i><br>");
         tw.Write("</html>");
-
-        return;
     }
 
     [Route(HttpVerbs.Get, "/device/{deviceIden}")]
@@ -72,15 +70,15 @@ public class HttpController : WebApiController
         var logiDevice = _logiDeviceCollection.GetDevices().FirstOrDefault(x => x.DeviceId == deviceIden);
         logiDevice ??= _logiDeviceCollection.GetDevices().FirstOrDefault(x => x.DeviceName == deviceIden);
 
-        using var tw = HttpContext.OpenResponseText();
+        using var tw = this.HttpContext.OpenResponseText();
         if (logiDevice == null)
         {
-            HttpContext.Response.StatusCode = 404;
+            this.HttpContext.Response.StatusCode = 404;
             tw.Write($"{deviceIden} not found.");
             return;
         }
 
-        DefaultResponse("text/xml");
+        this.DefaultResponse("text/xml");
 
         tw.Write(logiDevice.GetXmlData());
     }

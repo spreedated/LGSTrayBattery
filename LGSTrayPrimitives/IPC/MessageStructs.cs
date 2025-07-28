@@ -16,14 +16,14 @@ public enum IPCMessageRequestType : byte
 
 [Union(0, typeof(InitMessage))]
 [Union(1, typeof(UpdateMessage))]
-public abstract class IPCMessage(string deviceId)
+public abstract class IpcMessage(string deviceId)
 {
     [Key(0)]
     public string deviceId = deviceId;
 }
 
 [MessagePackObject]
-public class InitMessage(string deviceId, string deviceName, bool hasBattery, DeviceType deviceType) : IPCMessage(deviceId)
+public class InitMessage(string deviceId, string deviceName, bool hasBattery, DeviceType deviceType) : IpcMessage(deviceId)
 {
     [Key(1)]
     public string deviceName = deviceName;
@@ -43,7 +43,7 @@ public class UpdateMessage(
     int batteryMVolt,
     DateTimeOffset updateTime,
     double mileage = -1
-) : IPCMessage(deviceId)
+) : IpcMessage(deviceId)
 {
     [Key(1)]
     public double batteryPercentage = batteryPercentage;

@@ -44,7 +44,7 @@ public partial class App : Application
 
         builder.Services.AddWebserver(builder.Configuration);
 
-        builder.Services.AddIDeviceManager<LGSTrayHIDManager>(builder.Configuration);
+        builder.Services.AddIDeviceManager<LGsTrayHidManager>(builder.Configuration);
         builder.Services.AddIDeviceManager<GHubManager>(builder.Configuration);
         builder.Services.AddSingleton<ILogiDeviceCollection, LogiDeviceCollection>();
 
@@ -89,7 +89,7 @@ public partial class App : Application
         }
     }
 
-    private void CrashHandler(object sender, UnhandledExceptionEventArgs args)
+    private static void CrashHandler(object sender, UnhandledExceptionEventArgs args)
     {
         Exception e = (Exception)args.ExceptionObject;
         long unixTime = DateTimeOffset.Now.ToUnixTimeSeconds();

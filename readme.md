@@ -2,25 +2,6 @@
 
 A rewrite/combination of my two programs [LGSTrayBattery](https://github.com/andyvorld/LGSTrayBattery) and [LGSTrayBattery_GHUB](https://github.com/andyvorld/LGSTrayBattery_GHUB), which should allow for interaction via both the native HID and Logitech GaminG Hub websockets.
 
-## How to install
-
-[![GitHub Release](https://img.shields.io/github/v/release/andyvorld/LGSTrayBattery?sort=semver)](https://github.com/andyvorld/LGSTrayBattery/releases/latest)
-
-
-Please, visit [the latest release page](https://github.com/andyvorld/LGSTrayBattery/releases/latest) and download the release zip files from assets. Builds with the `-standalone` suffix are pre-bundled with .Net 8 and does not require any further dependencies, the non-standalone version requires .Net 8 to be pre-installed (https://dotnet.microsoft.com/en-us/download/dotnet/8.0).
-
-## Changes from V2
-*When migrating from earlier versions, device ids may have changed.*
-- Moved to .Net 8
-- Realtime reactive icons and rich tooltips
-    - Light/Dark theme is now reactive in realtime
-- Rewritten to use hidapi directly for hotplug support
-    - Wired/Wireless devices like the G403 should behave like a single device
-- Multi-device mode
-- Numerical Icons
-- HID.NET manager has been deprecated
-- Migrated to using a `.toml` for appsettings
-
 ## Features
 ### Tray Indicator
 ![image](https://user-images.githubusercontent.com/24492062/138280300-6966b6a4-ff6d-46e6-9698-d2c8d612eb11.png)
@@ -140,17 +121,15 @@ disabledDevices = [
 ## Working with
 - G403 Wireless
 - MX Anywhere 2
+- G915 Keyboard
+- G502 X Mouse
+- G522 Headset
 
-### Community Tested
-*HID Backend has changed, would need restesting of devices, please raise a PR to add to this list*
-
-
-## How to Build project
-TBA
 
 ## Acknowledgements
 This project began as a task with me messing around with my mouse for battery tracking.
 
+- This is a fork of https://github.com/andyvorld/LGSTrayBattery
 - [Solaar](https://github.com/pwr-Solaar/Solaar), for the source code to base the HID++ paramters and reverse engineering of the protocol.
 - [XB1ControllerBatteryIndicator](https://github.com/NiyaShy/XB1ControllerBatteryIndicator), for the idea and base of the icons
 - [The Noun Project](https://thenounproject.com/), for base icons

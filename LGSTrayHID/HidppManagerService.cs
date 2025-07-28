@@ -6,9 +6,9 @@ namespace LGSTrayHID
 {
     public class HidppManagerService : IHostedService
     {
-        private readonly IDistributedPublisher<IPCMessageType, IPCMessage> _publisher;
+        private readonly IDistributedPublisher<IPCMessageType, IpcMessage> _publisher;
 
-        public HidppManagerService(IDistributedPublisher<IPCMessageType, IPCMessage> publisher)
+        public HidppManagerService(IDistributedPublisher<IPCMessageType, IpcMessage> publisher)
         {
             _publisher = publisher;
 

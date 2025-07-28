@@ -68,11 +68,11 @@ namespace LGSTrayCore.Managers
         [GeneratedRegex(@"\/battery\/dev[0-9a-zA-Z]+\/state")]
         private static partial Regex BatteryDeviceStateRegex();
 
-        private readonly IPublisher<IPCMessage> _deviceEventBus;
+        private readonly IPublisher<IpcMessage> _deviceEventBus;
 
         protected WebsocketClient? _ws;
 
-        public GHubManager(IPublisher<IPCMessage> deviceEventBus)
+        public GHubManager(IPublisher<IpcMessage> deviceEventBus)
         {
             _deviceEventBus = deviceEventBus;
         }

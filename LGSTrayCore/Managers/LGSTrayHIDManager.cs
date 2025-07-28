@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace LGSTrayCore.Managers
 {
-    public class LGSTrayHIDManager : IDeviceManager, IHostedService, IDisposable
+    public class LGsTrayHidManager : IDeviceManager, IHostedService, IDisposable
     {
         #region IDisposable
         private Func<Task>? _diposeSubs;
@@ -21,24 +21,16 @@ namespace LGSTrayCore.Managers
                 {
                     _ = _diposeSubs?.Invoke();
                     _diposeSubs = null;
+                    _cts?.Dispose();
                 }
 
-                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
                 disposedValue = true;
             }
         }
 
-        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
-        // ~LGSTrayHIDDaemon()
-        // {
-        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-        //     Dispose(disposing: false);
-        // }
-
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: true);
+            this.Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
         #endregion
@@ -46,12 +38,12 @@ namespace LGSTrayCore.Managers
         private readonly CancellationTokenSource _cts = new();
         private CancellationTokenSource? _daemonCts;
 
-        private readonly IDistributedSubscriber<IPCMessageType, IPCMessage> _subscriber;
-        private readonly IPublisher<IPCMessage> _deviceEventBus;
+        private readonly IDistributedSubscriber<IPCMessageType, IpcMessage> _subscriber;
+        private readonly IPublisher<IpcMessage> _deviceEventBus;
 
-        public LGSTrayHIDManager(
-            IDistributedSubscriber<IPCMessageType, IPCMessage> subscriber,
-            IPublisher<IPCMessage> deviceEventBus
+        public LGsTrayHidManager(
+            IDistributedSubscriber<IPCMessageType, IpcMessage> subscriber,
+            IPublisher<IpcMessage> deviceEventBus
         )
         {
             _subscriber = subscriber;
@@ -104,7 +96,6 @@ namespace LGSTrayCore.Managers
                 x =>
                 {
                     var initMessage = (InitMessage)x;
-                    //_logiDeviceCollection.OnInitMessage(initMessage);
                     _deviceEventBus.Publish(initMessage);
                 },
                 cancellationToken
@@ -115,7 +106,6 @@ namespace LGSTrayCore.Managers
                 x =>
                 {
                     var updateMessage = (UpdateMessage)x;
-                    //_logiDeviceCollection.OnUpdateMessage(updateMessage);
                     _deviceEventBus.Publish(updateMessage);
                 },
                 cancellationToken
@@ -133,11 +123,11 @@ namespace LGSTrayCore.Managers
 
                 while (!_cts.Token.IsCancellationRequested)
                 {
-                    DateTime then = DateTime.Now;
-                    int ret = await DaemonLoop();
+                    DateTime then = DateTime.UtcNow;
+                    int ret = await this.DaemonLoop();
 
                     // Daemon returns -1 on .Kill(), assume its user
-                    if ((ret != -1) || (DateTime.Now - then).TotalSeconds < 20)
+                    if ((ret != -1) || (DateTime.UtcNow - then).TotalSeconds < 20)
                     {
                         fastFailCount++;
                     }
@@ -153,8 +143,6 @@ namespace LGSTrayCore.Managers
                     }
                 }
             }, CancellationToken.None);
-
-            return;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

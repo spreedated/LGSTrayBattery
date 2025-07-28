@@ -14,7 +14,7 @@ namespace LGSTrayUI
     {
         private readonly UserSettingsWrapper _userSettings;
         private readonly LogiDeviceViewModelFactory _logiDeviceViewModelFactory;
-        private readonly ISubscriber<IPCMessage> _subscriber;
+        private readonly ISubscriber<IpcMessage> _subscriber;
 
         public ObservableCollection<LogiDeviceViewModel> Devices { get; } = [];
         public IEnumerable<LogiDevice> GetDevices() => Devices;
@@ -22,7 +22,7 @@ namespace LGSTrayUI
         public LogiDeviceCollection(
             UserSettingsWrapper userSettings,
             LogiDeviceViewModelFactory logiDeviceViewModelFactory,
-            ISubscriber<IPCMessage> subscriber
+            ISubscriber<IpcMessage> subscriber
         )
         {
             _userSettings = userSettings;

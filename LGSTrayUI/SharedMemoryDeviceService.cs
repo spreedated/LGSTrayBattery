@@ -1,5 +1,8 @@
 ﻿using LGSTrayCore;
+using LGSTrayPrimitives;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.IO.MemoryMappedFiles;
@@ -18,14 +21,21 @@ namespace LGSTrayUI
         private bool disposedValue;
         private const string MapName = "LGSTray_DeviceList";
         private const int MapSize = 4096;
+        private readonly IOptions<AppSettings> _appSettings;
 
-        public SharedMemoryDeviceService(ILogiDeviceCollection deviceCollection)
+        public SharedMemoryDeviceService(ILogiDeviceCollection deviceCollection, IOptions<AppSettings> appSettings)
         {
             this._deviceCollection = deviceCollection;
+            _appSettings = appSettings;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
+            if (!_appSettings.Value.SharedMemory.Enabled)
+            {
+                return Task.CompletedTask;
+            }
+
             _mmf = MemoryMappedFile.CreateOrOpen(MapName, MapSize);
             _cts = new();
             _backgroundTask = Task.Run(() => this.RunAsync(_cts.Token), cancellationToken);

@@ -9,6 +9,7 @@ public class AppSettings
     public DeviceManagerSettings GHub { get; set; } = null!;
 
     public NativeDeviceManagerSettings Native { get; set; } = null!;
+    public SharedMemorySettings SharedMemory { get; set; } = null!;
 }
 
 public class UISettings
@@ -31,6 +32,11 @@ public class HttpServerSettings
     public bool UseIpv6 { get; set; }
 
     public string UrlPrefix => $"http://{Addr}:{Port}";
+}
+
+public class SharedMemorySettings
+{
+    public bool Enabled { get; set; }
 }
 
 public class DeviceManagerSettings

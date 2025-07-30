@@ -43,6 +43,7 @@ public partial class App : Application
         builder.Services.AddSingleton<LogiDeviceViewModelFactory>();
 
         builder.Services.AddWebserver(builder.Configuration);
+        builder.Services.AddHostedService<SharedMemoryDeviceService>();
 
         builder.Services.AddIDeviceManager<LGsTrayHidManager>(builder.Configuration);
         builder.Services.AddIDeviceManager<GHubManager>(builder.Configuration);
@@ -51,7 +52,6 @@ public partial class App : Application
         builder.Services.AddSingleton<MainTaskbarIconWrapper>();
         builder.Services.AddHostedService<NotifyIconViewModel>();
 
-        builder.Services.AddHostedService<SharedMemoryDeviceService>();
 
         var host = builder.Build();
         await host.RunAsync();

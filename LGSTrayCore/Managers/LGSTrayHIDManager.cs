@@ -60,8 +60,9 @@ namespace LGSTrayCore.Managers
                 RedirectStandardOutput = false,
                 FileName = Path.Combine(AppContext.BaseDirectory, "LGSTrayHID.exe"),
                 Arguments = Environment.ProcessId.ToString(),
-                UseShellExecute = true,
-                CreateNoWindow = true
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                WindowStyle = ProcessWindowStyle.Hidden
             };
             proc.Start();
 

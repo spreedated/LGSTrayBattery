@@ -121,7 +121,8 @@ namespace LGSTrayHID
                         Log.WriteLine($"{DeviceName} is marked as disabled");
                         return;
                     }
-                };
+                }
+                ;
 
                 ret = await _parent.WriteRead20(_parent.DevShort, new byte[7] { 0x10, _deviceIdx, featureId, 0x20 | SW_ID, 0x00, 0x00, 0x00 });
                 DeviceType = ret.GetParam(0);

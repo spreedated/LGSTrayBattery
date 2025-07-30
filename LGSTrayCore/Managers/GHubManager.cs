@@ -185,7 +185,7 @@ namespace LGSTrayCore.Managers
                     _deviceEventBus.Publish(new InitMessage(
                         deviceId,
                         deviceToken["extendedDisplayName"]!.ToString(),
-                        (bool) deviceToken["capabilities"]!["hasBatteryStatus"]!,
+                        (bool)deviceToken["capabilities"]!["hasBatteryStatus"]!,
                         deviceType
                     ));
 

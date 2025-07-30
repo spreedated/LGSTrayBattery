@@ -1,6 +1,5 @@
 ﻿using LGSTrayCore;
 using LGSTrayPrimitives;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using System;

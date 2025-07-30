@@ -1,5 +1,5 @@
-﻿using EmbedIO.Routing;
-using EmbedIO;
+﻿using EmbedIO;
+using EmbedIO.Routing;
 using EmbedIO.WebApi;
 using System.Reflection;
 

@@ -1,18 +1,17 @@
 ﻿using LGSTrayCore;
 using LGSTrayCore.Managers;
+using LGSTrayPrimitives;
+using LGSTrayPrimitives.IPC;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Windows;
 using System;
-using LGSTrayPrimitives.IPC;
 using System.Globalization;
 using System.IO;
 using System.Threading;
-using LGSTrayPrimitives;
-using Tommy.Extensions.Configuration;
-
-using static LGSTrayUI.AppExtensions;
 using System.Threading.Tasks;
+using System.Windows;
+using Tommy.Extensions.Configuration;
+using static LGSTrayUI.AppExtensions;
 
 namespace LGSTrayUI;
 
@@ -69,8 +68,8 @@ public partial class App : Application
             if (ex is FileNotFoundException || ex is InvalidDataException)
             {
                 var msgBoxRet = MessageBox.Show(
-                    "Failed to read settings, do you want reset to default?", 
-                    "LGSTray - Settings Load Error", 
+                    "Failed to read settings, do you want reset to default?",
+                    "LGSTray - Settings Load Error",
                     MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.No
                 );
 

@@ -1,9 +1,9 @@
-﻿using static LGSTrayHID.HidApi.HidApi;
-using static LGSTrayHID.HidApi.HidApiWinApi;
-using static LGSTrayHID.HidApi.HidApiHotPlug;
-using LGSTrayHID.HidApi;
-using System.Collections.Concurrent;
+﻿using LGSTrayHID.HidApi;
 using LGSTrayPrimitives.MessageStructs;
+using System.Collections.Concurrent;
+using static LGSTrayHID.HidApi.HidApi;
+using static LGSTrayHID.HidApi.HidApiHotPlug;
+using static LGSTrayHID.HidApi.HidApiWinApi;
 
 namespace LGSTrayHID
 {
@@ -124,7 +124,7 @@ namespace LGSTrayHID
                 HidHotplugRegisterCallback(0x046D, 0x00, HidApiHotPlugEvent.HID_API_HOTPLUG_EVENT_DEVICE_LEFT, HidApiHotPlugFlag.NONE, DeviceLeft, IntPtr.Zero, (int*)IntPtr.Zero);
             }
         }
-    
+
         public async Task ForceBatteryUpdates()
         {
             foreach (var (_, hidppDevice) in _deviceMap)

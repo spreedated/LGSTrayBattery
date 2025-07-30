@@ -1,13 +1,6 @@
 ﻿using LGSTrayHID.HidApi;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Data;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
 using System.Threading.Channels;
-using System.Threading.Tasks;
 
 using static LGSTrayHID.HidApi.HidApi;
 
@@ -72,7 +65,7 @@ namespace LGSTrayHID
         }
 
         public async Task SetDevShort(nint devShort)
-        { 
+        {
             if (_devShort != IntPtr.Zero)
             {
                 throw new ReadOnlyException();
@@ -94,7 +87,7 @@ namespace LGSTrayHID
         private async Task ReadThread(HidDevicePtr dev, int bufferSize)
         {
             byte[] buffer = new byte[bufferSize];
-            while(_isReading)
+            while (_isReading)
             {
                 var ret = dev.Read(buffer, bufferSize, READ_TIMEOUT);
                 if (!_isReading) { break; }
@@ -191,7 +184,7 @@ namespace LGSTrayHID
 
             try
             {
-                await hidDevicePtr.WriteAsync((byte[]) buffer);
+                await hidDevicePtr.WriteAsync((byte[])buffer);
 
                 CancellationTokenSource cts = new();
                 cts.CancelAfter(timeout);
@@ -217,7 +210,7 @@ namespace LGSTrayHID
                     catch (OperationCanceledException) { break; }
                 }
 
-                return (Hidpp20) Array.Empty<byte>();
+                return (Hidpp20)Array.Empty<byte>();
             }
             finally
             {
@@ -289,7 +282,7 @@ namespace LGSTrayHID
             {
                 return;
             }
-            
+
 #if DEBUG
             Console.WriteLine("Device ready");
 #endif

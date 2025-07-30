@@ -1,13 +1,13 @@
-﻿using LGSTrayCore;
+﻿using Hardcodet.Wpf.TaskbarNotification;
+using LGSTrayCore;
+using LGSTrayPrimitives;
 using LGSTrayUI.Properties;
+using Microsoft.Win32;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using Hardcodet.Wpf.TaskbarNotification;
 using System.Runtime.InteropServices;
-using LGSTrayPrimitives;
-using Microsoft.Win32;
 
 namespace LGSTrayUI
 {

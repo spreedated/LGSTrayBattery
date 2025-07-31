@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <NoWarn>1701;1702;IDE0290;IDE0063</NoWarn>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>memorywrapper.snk</AssemblyOriginatorKeyFile>
+    <Authors>Dante Karl Wackermann</Authors>
+    <Version>1.0.0</Version>
+    <AssemblyTitle>Logitech Battery Service Wrapper</AssemblyTitle>
+    <Title>Logitech Battery Service Wrapper</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LGSTrayPrimitives\LGSTrayPrimitives.csproj" />
+  </ItemGroup>
+
+</Project>

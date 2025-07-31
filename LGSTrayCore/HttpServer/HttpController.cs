@@ -1,6 +1,7 @@
 ﻿using EmbedIO;
 using EmbedIO.Routing;
 using EmbedIO.WebApi;
+using LGSTrayCore.Logic;
 using System.Reflection;
 
 namespace LGSTrayCore.HttpServer;
@@ -36,6 +37,25 @@ public class HttpController : WebApiController
         this.Response.DisableCaching();
         this.Response.KeepAlive = false;
         this.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+    }
+
+    [Route(HttpVerbs.Get, "/favicon.ico")]
+    public void GetFavicon()
+    {
+        this.Response.ContentType = "image/x-icon";
+        this.Response.DisableCaching();
+        this.Response.KeepAlive = false;
+
+        using (MemoryStream ms = new())
+        {
+            ms.Write(HelperFunctions.LoadEmbeddedIcon("logo_white.ico"));
+            ms.Seek(0, SeekOrigin.Begin);
+
+            using (var httpStream = this.HttpContext.OpenResponseStream())
+            {
+                ms.CopyTo(httpStream);
+            }
+        }
     }
 
     [Route(HttpVerbs.Get, "/")]

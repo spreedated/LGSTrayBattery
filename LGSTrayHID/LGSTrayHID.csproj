@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MessagePipe.Interprocess" Version="1.7.4" />
+    <PackageReference Include="MessagePipe.Interprocess" Version="1.8.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.7" />
     <PackageReference Include="System.Diagnostics.EventLog" Version="9.0.7" />
     <PackageReference Include="Tommy.Extensions.Configuration" Version="6.2.0" />

@@ -13,6 +13,8 @@
     <Nullable>enable</Nullable>
     <PublishSingleFile>true</PublishSingleFile>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>lgshid.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

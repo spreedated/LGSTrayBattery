@@ -19,11 +19,7 @@ namespace LGSTrayUI
         public ObservableCollection<LogiDeviceViewModel> Devices { get; } = [];
         public IEnumerable<LogiDevice> GetDevices() => Devices;
 
-        public LogiDeviceCollection(
-            UserSettingsWrapper userSettings,
-            LogiDeviceViewModelFactory logiDeviceViewModelFactory,
-            ISubscriber<IpcMessage> subscriber
-        )
+        public LogiDeviceCollection(UserSettingsWrapper userSettings, LogiDeviceViewModelFactory logiDeviceViewModelFactory, ISubscriber<IpcMessage> subscriber)
         {
             _userSettings = userSettings;
             _logiDeviceViewModelFactory = logiDeviceViewModelFactory;

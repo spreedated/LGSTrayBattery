@@ -54,7 +54,7 @@ public partial class App : Application
 
         var host = builder.Build();
         await host.RunAsync();
-        Dispatcher.InvokeShutdown();
+        base.Dispatcher.InvokeShutdown();
     }
 
     static async Task LoadAppSettings(Microsoft.Extensions.Configuration.ConfigurationManager config)

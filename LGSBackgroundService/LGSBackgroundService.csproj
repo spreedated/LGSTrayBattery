@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <NoWarn>1701;1702;IDE0290;IDE0063</NoWarn>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>lgsbackground.snk</AssemblyOriginatorKeyFile>
+    <Authors>Dante Karl Wackermann</Authors>
+    <Version>1.0.0</Version>
+    <AssemblyTitle>Logitech Battery Service Provider</AssemblyTitle>
+    <Title>Logitech Battery Service Provider</Title>
+    <UserSecretsId>dotnet-LGSBackgroundService-981d9b9d-528c-48b2-8386-c60a3454d570</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="9.0.7" />
+    <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="9.0.0" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
+    <PackageReference Include="MessagePipe.Interprocess" Version="1.7.4" />
+    <PackageReference Include="MessagePack" Version="3.1.4" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LGSTrayCore\LGSTrayCore.csproj" />
+    <ProjectReference Include="..\LGSTrayHID\LGSTrayHID.csproj" />
+  </ItemGroup>
+</Project>

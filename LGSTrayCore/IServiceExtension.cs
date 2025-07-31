@@ -21,12 +21,23 @@ public static class IServiceExtension
     public static void AddIDeviceManager<T>(this IServiceCollection services, IConfiguration configs) where T : class, IDeviceManager, IHostedService
     {
         var settings = configs.Get<AppSettings>()!;
-        bool isEnabled = typeof(T) switch
+
+        bool isEnabled = false;
+
+        if (settings == null || settings.GHub == null || settings.Native == null)
         {
-            { } when typeof(T) == typeof(GHubManager) => settings.GHub.Enabled,
-            { } when typeof(T) == typeof(LGsTrayHidManager) => settings.Native.Enabled,
-            _ => false
-        };
+            isEnabled = true;
+        }
+        else
+        {
+            isEnabled = typeof(T) switch
+            {
+                { } when typeof(T) == typeof(GHubManager) => settings.GHub.Enabled,
+                { } when typeof(T) == typeof(LGsTrayHidManager) => settings.Native.Enabled,
+                _ => false
+            };
+        }
+
         if (!isEnabled) return;
 
         services.AddSingleton<T>();

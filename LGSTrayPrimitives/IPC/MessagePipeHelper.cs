@@ -1,5 +1,5 @@
-﻿using MessagePipe;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using static LGSTrayPrimitives.Constants;
 
 namespace LGSTrayPrimitives.IPC
 {
@@ -11,7 +11,7 @@ namespace LGSTrayPrimitives.IPC
             {
                 options.EnableCaptureStackTrace = true;
             }).
-            AddNamedPipeInterprocess("LGSTray", config =>
+            AddNamedPipeInterprocess(NAMED_PIPE_NAME, config =>
             {
                 config.HostAsServer = hostAsServer;
             });

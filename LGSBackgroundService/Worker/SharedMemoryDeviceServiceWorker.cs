@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using static LGSTrayPrimitives.Constants;
 
 namespace LGSBackgroundService.Worker
 {
@@ -20,7 +21,7 @@ namespace LGSBackgroundService.Worker
         private MemoryMappedFile mmf;
         private CancellationTokenSource _cts;
         private bool disposedValue;
-        private const string MapName = "LGS_Devices";
+        private const string MapName = MEMORY_MAP_NAME;
         private const int MapSize = 4096;
         private readonly ISubscriber<IpcMessage> subscriber;
         private readonly ILogger logger;

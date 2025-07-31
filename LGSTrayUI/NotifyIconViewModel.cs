@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using static LGSTrayPrimitives.Constants;
 
 namespace LGSTrayUI
 {
@@ -34,7 +35,7 @@ namespace LGSTrayUI
             set
             {
                 _userSettings.NumericDisplay = value;
-                OnPropertyChanged();
+                base.OnPropertyChanged();
             }
         }
 
@@ -46,8 +47,8 @@ namespace LGSTrayUI
             }
         }
 
-        private const string AutoStartRegKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
-        private const string AutoStartRegKeyValue = "LGSTrayGUI";
+        private const string AutoStartRegKey = AUTOSTART_REG_KEY;
+        private const string AutoStartRegKeyValue = AUTOSTART_REG_KEY_VALUE;
         private bool? _autoStart = null;
         public bool AutoStart
         {
@@ -133,7 +134,7 @@ namespace LGSTrayUI
         private async Task RediscoverDevices()
         {
             Console.WriteLine("Rediscover");
-            RediscoverDevicesEnabled = false;
+            this.RediscoverDevicesEnabled = false;
 
             foreach (var manager in _deviceManagers)
             {
@@ -142,7 +143,7 @@ namespace LGSTrayUI
 
             await Task.Delay(10_000);
 
-            RediscoverDevicesEnabled = true;
+            this.RediscoverDevicesEnabled = true;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)

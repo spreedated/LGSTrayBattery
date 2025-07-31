@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using LGSTrayPrimitives;
+using static LGSTrayPrimitives.Constants;
 
 namespace LGSTrayCore
 {
@@ -45,9 +46,9 @@ namespace LGSTrayCore
             get
             {
 #if DEBUG
-                return $"{DeviceName}, {BatteryPercentage:f2}% - {LastUpdate}";
+                return $"{this.DeviceName}, {this.BatteryPercentage:f2}% - {this.LastUpdate}";
 #else
-                return $"{DeviceName}, {BatteryPercentage:f2}%";
+                return $"{this.DeviceName}, {this.BatteryPercentage:f2}%";
 #endif
             }
         }
@@ -68,19 +69,15 @@ namespace LGSTrayCore
 
         public string GetXmlData()
         {
-            return
-                $"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                $"<xml>" +
-                $"<device_id>{DeviceId}</device_id>" +
-                $"<device_name>{DeviceName}</device_name>" +
-                $"<device_type>{DeviceType}</device_type>" +
-                $"<battery_percent>{BatteryPercentage:f2}</battery_percent>" +
-                $"<battery_voltage>{BatteryVoltage:f2}</battery_voltage>" +
-                $"<mileage>{BatteryMileage:f2}</mileage>" +
-                $"<charging>{PowerSupplyStatus == PowerSupplyStatus.POWER_SUPPLY_STATUS_CHARGING}</charging>" +
-                $"<last_update>{LastUpdate}</last_update>" +
-                $"</xml>"
-                ;
+            return XAML_DATA_TEMPLATE
+                .Replace("##DEVICEID##", this.DeviceId)
+                .Replace("###DEVICENAME###", this.DeviceName)
+                .Replace("###DEVICETYPE###", this.DeviceType.ToString())
+                .Replace("###BATTERYPERCENTAGE###", this.BatteryPercentage.ToString("f2"))
+                .Replace("###BATTERYVOLTAGE###", this.BatteryVoltage.ToString("f2"))
+                .Replace("###BATTERYMILEAGE###", this.BatteryMileage.ToString("f2"))
+                .Replace("###POWERSUPPLYSTATUS###", (this.PowerSupplyStatus == PowerSupplyStatus.POWER_SUPPLY_STATUS_CHARGING).ToString())
+                .Replace("###LASTUPDATE###", this.LastUpdate.ToString());
         }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 using Serilog.Extensions.Logging;
+using static LGSTrayPrimitives.Constants;
 
 namespace LGSBackgroundService
 {
@@ -42,7 +43,7 @@ namespace LGSBackgroundService
 
             builder.Services.AddWindowsService(options =>
             {
-                options.ServiceName = "LGS Background Service";
+                options.ServiceName = BACKGROUND_SERVICE_NAME;
             });
 
             IHost host = builder.Build();

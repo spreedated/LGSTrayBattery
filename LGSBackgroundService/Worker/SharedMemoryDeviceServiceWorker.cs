@@ -21,7 +21,6 @@ namespace LGSBackgroundService.Worker
         private MemoryMappedFile mmf;
         private CancellationTokenSource _cts;
         private bool disposedValue;
-        private const string MapName = MEMORY_MAP_NAME;
         private const int MapSize = 4096;
         private readonly ISubscriber<IpcMessage> subscriber;
         private readonly ILogger logger;
@@ -67,7 +66,7 @@ namespace LGSBackgroundService.Worker
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            mmf = MemoryMappedFile.CreateOrOpen(MapName, MapSize);
+            mmf = MemoryMappedFile.CreateOrOpen($"Global\\{MEMORY_MAP_NAME}", MapSize, MemoryMappedFileAccess.ReadWriteExecute, MemoryMappedFileOptions.None, System.IO.HandleInheritability.Inheritable);
             _cts = new();
 
             return Task.CompletedTask;

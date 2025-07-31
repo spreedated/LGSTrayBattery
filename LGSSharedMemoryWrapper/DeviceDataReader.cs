@@ -12,7 +12,7 @@ namespace LGSSharedMemoryWrapper
         {
             try
             {
-                using (MemoryMappedFile mmf = MemoryMappedFile.OpenExisting(MEMORY_MAP_NAME))
+                using (MemoryMappedFile mmf = MemoryMappedFile.OpenExisting($"Global\\{MEMORY_MAP_NAME}"))
                 {
                     using (MemoryMappedViewAccessor accessor = mmf.CreateViewAccessor())
                     {

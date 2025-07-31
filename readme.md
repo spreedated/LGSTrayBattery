@@ -3,6 +3,15 @@
 A rewrite/combination of my two programs [LGSTrayBattery](https://github.com/andyvorld/LGSTrayBattery) and [LGSTrayBattery_GHUB](https://github.com/andyvorld/LGSTrayBattery_GHUB), which should allow for interaction via both the native HID and Logitech GaminG Hub websockets.
 
 ## Features
+
+### Windows Background Service
+
+The `LGSBackgroundService.exe` can be installed as a Windows Service (no not a container).
+It exposes a shared memory segment that can be read by any application that supports reading shared memory segments.
+The memory mapped filename is ***Global\LGS_Devices***.
+
+Note: The background service ***has to*** run under the same user or you won't be able to read the shared memory segment.
+
 ### Tray Indicator
 ![image](https://user-images.githubusercontent.com/24492062/138280300-6966b6a4-ff6d-46e6-9698-d2c8d612eb11.png)
 
